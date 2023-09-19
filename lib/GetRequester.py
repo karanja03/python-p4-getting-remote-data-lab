@@ -5,9 +5,17 @@ class GetRequester:
 
     def __init__(self, url):
         self.url = url
-
+# send a get request to the url
     def get_response_body(self):
-        pass
+        response= requests.get(self.url)
+        return response.text
+
 
     def load_json(self):
-        pass
+        response_body= self.get_response_body()
+        try:
+            json_data = json.loads(response_body)
+            return json_data
+        except json.JSONDecodeError:
+            return None
+        
